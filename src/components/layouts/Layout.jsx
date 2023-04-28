@@ -2,12 +2,12 @@ import { useNavigate, Link, Outlet } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 const Layout = () => {
-  const { auth, setAuth } = useAuth();
+  const { token, dispatch } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     // API call to /auth/logout
-    setAuth({});
+    dispatch({ type: "DELETE" });
     navigate('/login');
   }
 
@@ -17,7 +17,7 @@ const Layout = () => {
         <div>
           <Link to="/">Home</Link>
         </div>
-        {auth?.email ? (
+        {token ? (
           <>
             <div>
               <Link to="/users">Users</Link>

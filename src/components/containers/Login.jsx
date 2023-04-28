@@ -6,7 +6,7 @@ import PasscodeForm from "../ui/PasscodeForm";
 import axios from "../../api/axios";
 
 const Login = () => {
-  const { setAuth } = useAuth();
+  const { dispatch } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -44,7 +44,7 @@ const Login = () => {
         }
       );
       const accessToken = response?.data?.accessToken;
-      setAuth({ email, accessToken });
+      dispatch({ type: "SET", payload: accessToken });
       setEmail("");
       setPasscode("");
       navigate(from, { replace: true });
